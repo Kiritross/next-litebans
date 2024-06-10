@@ -2,6 +2,8 @@ import { Prisma } from "@prisma/client";
 import { db } from "../db";
 import { PunishmentListItem } from "@/types";
 import { Dictionary } from "../language/types";
+import { cleanMessage } from "../../utils/parse"
+
 
 const getPunishmentCount = async (player?: string, staff?: string) => {
   const bans = await db.litebans_bans.count({
@@ -88,6 +90,7 @@ const sanitizePunishments = async (dictionary: Dictionary, punishments: Punishme
       console: punishment.banned_by_uuid === "[Console]",
       status,
       until,
+      reason: cleanMessage(punishment.reason),
       name
     }
   }));

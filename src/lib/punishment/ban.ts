@@ -1,4 +1,5 @@
 import { cache } from "react";
+import { cleanMessage } from "../../utils/parse"
 
 import { PunishmentListItem } from "@/types";
 
@@ -59,6 +60,7 @@ const sanitizeBans = async (dictionary: Dictionary, bans: PunishmentListItem[]) 
       permanent: until == dictionary.table.permanent,
       active,
       until,
+      reason: cleanMessage(ban.reason),
       name,
     }
   }));

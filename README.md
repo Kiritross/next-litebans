@@ -108,5 +108,26 @@ If your server allow Bedrock players through [Geyser](https://github.com/GeyserM
   },
 ```
 
-> [!WARNING]
+> [!IMPORTANT]
 > If you are using a special character for your Bedrock players, such as ``*.+?^${}()|[\]\\``, etc., you will need to enter ``src/utils/bedrock.ts``, and change the line 13 to ``const bedrockPrefixRegex = new RegExp(`^\\${siteConfig.bedrock.prefix}`);``, escaping the special character with a double backslash.
+
+### 🌈 Color code remove
+
+If you have any plugin that punishes with color codes as reason, you should modify the color patterns in `src/utils/parse.ts`
+
+Everything that matches the RegExp will be removed from the final reason
+
+There is an example:
+```ts
+const patterns: any[] = [
+  /[&§][0-9a-fk-or]/g,  // Minecraft color codes (& and §)
+  /<\/?[\w:]+(?:['"][^'"]*['"])*>/g  // MiniMessage tags
+];
+```
+
+> [!NOTE] 
+> To disable this feature, remove the RegExp inside patterns.
+> ```ts
+> const patterns: any[] = [
+> ];
+> ```

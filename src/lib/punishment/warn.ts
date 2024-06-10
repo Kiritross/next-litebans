@@ -1,4 +1,5 @@
 import { cache } from "react";
+import { cleanMessage } from "../../utils/parse"
 
 import { PunishmentListItem } from "@/types";
 
@@ -53,6 +54,7 @@ const sanitizeWarns = async (warns: (PunishmentListItem & { warned: boolean | st
       console: warn.banned_by_uuid === "[Console]",
       active: typeof warn.active === "boolean" ? warn.active : warn.active === "1",
       warned: typeof warn.warned === "boolean" ? warn.warned : warn.warned === "1",
+      reason: cleanMessage(warn.reason),
       name
     }
   }));

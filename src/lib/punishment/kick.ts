@@ -1,4 +1,5 @@
 import { cache } from "react";
+import { cleanMessage } from "../../utils/parse"
 
 import { PunishmentListItem } from "@/types";
 
@@ -51,6 +52,7 @@ const sanitizeKicks = async (kicks: PunishmentListItem[]) => {
       time: new Date(parseInt(kick.time.toString())),
       console: kick.banned_by_uuid === "[Console]",
       active: typeof kick.active === "boolean" ? kick.active : kick.active === "1",
+      reason: cleanMessage(kick.reason),
       name
     }
   }));
