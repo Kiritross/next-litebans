@@ -1,6 +1,7 @@
 import { cache } from "react";
 import { cleanMessage } from "../../utils/parse"
 
+import { siteConfig } from "@config/site";
 import { PunishmentListItem } from "@/types";
 
 import { db } from "../db";
@@ -56,7 +57,7 @@ const sanitizeMutes = async (dictionary: Dictionary, mutes: PunishmentListItem[]
       status: until == dictionary.table.permanent ? 
                 (active ? true : false) : 
                 (until < new Date() ? false : undefined),
-      console: mute.banned_by_uuid === "[Console]",
+      console: mute.banned_by_uuid === siteConfig.console.uuid,
       permanent: until == dictionary.table.permanent,
       active,
       until,
